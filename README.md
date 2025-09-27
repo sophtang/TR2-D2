@@ -1,0 +1,3 @@
+---
+license: cc-by-nc-nd-4.0
+---
