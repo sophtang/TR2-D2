@@ -1,0 +1,21 @@
+name: tr2d2-pep
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - rdkit
+  - numpy
+  - pandas
+  - scikit-learn
+  - jupyterlab
+  - matplotlib-base
+  - seaborn
+  - tqdm
+  - pyyaml
+  - torchvision
+  - pytorch-cuda=12.4
+  - pip:
+      - pytorch-lightning==2.5.5
+      - fair-esm==2.0.0
+      - transformers==4.56.2

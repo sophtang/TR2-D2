@@ -4,7 +4,7 @@
 
 [**Sophia Tang**](https://sophtang.github.io/)\*, [**Yuchen Zhu**](https://yuchen-zhu-zyc.github.io/)\*, [**Molei Tao**](https://mtao8.math.gatech.edu/), and [**Pranam Chatterjee**](https://www.chatterjeelab.com/)
 
-![TR2-D2](assets/anim-good.gif)
+![TR2-D2](assets/tr2d2-anim.gif)
 
 This is the repository for **[TR2-D2: Tree Search Guided Trajectory-Aware Fine-Tuning for Discrete Diffusion](https://arxiv.org/abs/2509.25171)** 🤖🌳. It is partially built on the **[PepTune repo](https://github.com/programmablebio/peptune)** ([Tang et al. 2024](https://arxiv.org/abs/2412.17780)) and **MDNS** ([Zhu et al. 2025](https://arxiv.org/abs/2508.10684)).
 

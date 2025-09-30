@@ -15,3 +15,4 @@ tr2d2-pep/utils/__pycache__/
 *.ipynb
 *.pt
 tr2d2-pep/scoring/functions/classifiers/best_model.pt
+.gitignore
