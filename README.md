@@ -26,7 +26,7 @@ In this experiment, we fine-tune the pre-trained **DNA enhancer MDM from DRAKES*
 
 ---
 
-In this experiment, we fine-tune the pre-trained **unconditional peptide SMILES MDM from PepTune** ([Tang et al. 2024](https://arxiv.org/abs/2412.17780)) ****to optimize **multiple therapeutic properties**, including target protein binding affinity, solubility, non-hemolysis, non-fouling, and permeability. We show that one-shot generation from the fine-tuned policy outperforms inference-time multi-objective guidance, marking a significant advance over prior fine-tuning methods. Code and instructions to reproduce our results are provided in `/tr2d2-pep`.
+In this experiment, we fine-tune the pre-trained **unconditional peptide SMILES MDM from PepTune** ([Tang et al. 2024](https://arxiv.org/abs/2412.17780)) to optimize **multiple therapeutic properties**, including target protein binding affinity, solubility, non-hemolysis, non-fouling, and permeability. We show that one-shot generation from the fine-tuned policy outperforms inference-time multi-objective guidance, marking a significant advance over prior fine-tuning methods. Code and instructions to reproduce our results are provided in `/tr2d2-pep`.
 
 ![TR2-D2 for Multi-Objective Peptide Design](assets/peptides.png)
 
