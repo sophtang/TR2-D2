@@ -1,0 +1,4 @@
+tr2d2-pep/scoring/functions/classifiers/permeability-xgboost.json filter=lfs diff=lfs merge=lfs -text
+assets/peptides.png filter=lfs diff=lfs merge=lfs -text
+assets/tr2d2-anim.gif filter=lfs diff=lfs merge=lfs -text
+assets/anim-good.gif filter=lfs diff=lfs merge=lfs -text

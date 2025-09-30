@@ -1,0 +1,159 @@
+noise:
+  type: loglinear
+  sigma_min: 1e-4
+  sigma_max: 20
+  state_dependent: True
+
+mode: ppl_eval  # train / ppl_eval / sample_eval
+diffusion: absorbing_state
+vocab: old_smiles # old_smiles / new_smiles / selfies / helm
+backbone: roformer  # peptideclm / helmgpt / dit / roformer / finetune_roformer
+parameterization: subs  # subs
+time_conditioning: False
+T: 0  # 0 (continuous time) / 1000 
+subs_masking: False
+
+seed: 42
+
+mcts: 
+  num_children: 50
+  num_objectives: 5
+  topk: 100
+  mask_token: 4
+  num_iter: 128
+  sampling: 0 # 0 is gumbel sampling / > 0 samples children from top k probs
+  invalid_penalty: 0.5
+  sample_prob: 1.0
+  perm: True
+  dual: False
+  single: False
+  time_dependent: True
+
+lr_scheduler:
+  _target_: transformers.get_constant_schedule_with_warmup
+  num_warmup_steps: 2500
+
+data:
+  train: /home/st512/peptune/scripts/peptide-mdlm-mcts/data/finetune2/30K-train.csv
+  valid: /home/st512/peptune/scripts/peptide-mdlm-mcts/data/finetune2/30K-val.csv
+  batchinohup ng: wrapping # padding / wrapping
+
+loader:
+  global_batch_size: 64
+  eval_global_batch_size: ${.global_batch_size}
+  # Note: batch_size and eval_batch_size are **per machine**
+  batch_size: ${div_up:${.global_batch_size}, ${eval:${trainer.devices} * ${trainer.num_nodes}}}
+  eval_batch_size: ${div_up:${.eval_global_batch_size}, ${eval:${trainer.devices} * ${trainer.num_nodes}}}
+  num_workers: ${eval:"len(__import__('os').sched_getaffinity(0))"}
+  pin_memory: True
+
+sampling:
+  predictor: ddpm_cache  # analytic, ddpm, ddpm_cache
+  num_sequences: 100
+  sampling_eps: 1e-3
+  steps: 128
+  seq_length: 100
+  noise_removal: True
+  num_sample_batches: 2  # Total samples: `num_gpus` * `loader.eval_batch_size` * num_sample_batches
+  num_sample_log: 2
+  stride_length: 1
+  num_strides: 1
+
+training:
+  antithetic_sampling: True
+  sampling_eps: 1e-3
+  focus_mask: False
+  #dynamic_batching: True
+  accumulator: False
+
+eval:
+  checkpoint_path: 
+  disable_ema: False
+  compute_generative_perplexity: False
+  perplexity_batch_size: 8
+  compute_perplexity_on_sanity: False
+  gen_ppl_eval_model_name_or_path: gpt2-large  # gpt2-large, meta-llama/Llama-2-7b-hf
+  generate_samples: True
+  generation_model: 
+  
+optim:
+  weight_decay: 0.075
+  lr: 3e-4
+  beta1: 0.9
+  beta2: 0.999
+  eps: 1e-8
+
+pepclm:
+  hidden_size: 768
+  cond_dim: 256
+  n_heads: 20
+  n_blocks: 4
+  dropout: 0.5
+  length: 512
+  #scale_by_sigma: True
+
+model:
+  type: ddit
+  hidden_size: 768
+  cond_dim: 128
+  length: 512
+  n_blocks: 12
+  n_heads: 12
+  scale_by_sigma: True
+  dropout: 0.1
+
+roformer:
+  hidden_size: 768
+  n_layers: 8
+  n_heads: 8
+  max_position_embeddings: 1035
+
+helmgpt:
+  hidden_size: 256
+  embd_pdrop: 0.1
+  resid_pdrop: 0.1
+  attn_pdrop: 0.1
+  ff_dropout: 0.
+  block_size: 140
+  n_layer: 8
+  n_heads: 8
+
+
+trainer:
+  _target_: lightning.Trainer
+  accelerator: cuda
+  num_nodes: 1
+  devices: ${device_count:}
+  accumulate_grad_batches: ${div_up:${loader.global_batch_size}, ${eval:${trainer.devices} * ${loader.batch_size} * ${trainer.num_nodes}}}
+  gradient_clip_val: 1.0
+  precision: 64-true
+  num_sanity_val_steps: 2
+  max_epochs: 100
+  max_steps: 1_000_000
+  log_every_n_steps: 10
+  limit_train_batches: 1.0   # train on full dataset, can be used to toggle quick run
+  limit_val_batches: 1.0     # validate on full dataset, can be used to toggle quick run
+  #val_check_interval: 40 #954
+  check_val_every_n_epoch: 1
+
+hydra:
+  run:
+    dir: ./${now:%Y.%m.%d}/
+  job:
+    chdir: True
+
+checkpointing:
+  # Use custom `save_dir` if, e.g., saving to S3 bucket, otherwise leave this parameter as is
+  save_dir: ${cwd:}
+  # Note: `checkpoints` path should correspond to `checkpoint_every_n_steps.dirpath`
+  resume_from_ckpt: True
+  resume_ckpt_path:
+
+callbacks:
+  model_checkpoint:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    every_n_epochs: 1
+    monitor: "val/nll"
+    save_top_k: 10
+    mode: "min"
+    dirpath: 
