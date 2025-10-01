@@ -6,7 +6,6 @@ SCRIPT_LOC=$HOME_LOC/TR2-D2/tr2d2-pep
 LOG_LOC=$HOME_LOC/TR2-D2/tr2d2-pep/logs
 DATE=$(date +%m_%d)
 SPECIAL_PREFIX='tr2d2-finetune-tfr'
-# set 3 have skip connection
 PYTHON_EXECUTABLE=$ENV_PATH/bin/python
 
 # ===================================================================
@@ -18,7 +17,7 @@ conda activate $ENV_PATH
 
 $PYTHON_EXECUTABLE $SCRIPT_LOC/finetune.py \
     --base_path $HOME_LOC \
-    --device "cuda:6" \
+    --device "cuda:0" \
     --noise_removal \
     --wdce_num_replicates 16 \
     --buffer_size 20 \

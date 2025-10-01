@@ -6,7 +6,6 @@ SCRIPT_LOC=$HOME_LOC/tr2d2/peptides
 LOG_LOC=$HOME_LOC/tr2d2/peptides/logs
 DATE=$(date +%m_%d)
 SPECIAL_PREFIX='tfr-peptune-baseline'
-# set 3 have skip connection
 PYTHON_EXECUTABLE=$ENV_PATH/bin/python
 
 # ===================================================================

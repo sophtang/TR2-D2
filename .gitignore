@@ -6,6 +6,7 @@ __pycache__/
 tr2d2-pep/wandb/
 tr2d2-pep/pretrained/
 tr2d2-pep/logs/
+tr2d2-pep/results/
 tr2d2-pep/__pycache__/
 tr2d2-pep/scoring/__pycache__/
 tr2d2-pep/tokenizer/__pycache__/
@@ -16,3 +17,4 @@ tr2d2-pep/utils/__pycache__/
 *.pt
 tr2d2-pep/scoring/functions/classifiers/best_model.pt
 .gitignore
+.gitattributes
