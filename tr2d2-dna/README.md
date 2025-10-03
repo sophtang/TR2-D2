@@ -2,7 +2,7 @@
 
 This part of the code is for finetuning DNA sequence models for optimizing DNA enhancer activity with TR2-D2.
 
-The codebase is built upon [MDLM (Sahoo et.al, 2023)](https://github.com/kuleshov-group/mdlm), [Drakes (Wang et.al, 2024)](https://github.com/ChenyuWang-Monica/DRAKES), [SEPO (Zekri et.al, 2025)](https://github.com/ozekri/SEPO/tree/main), and [MDNS (Zhu et.al, 2025)](https://arxiv.org/abs/2508.10684).
+The codebase is partially built upon [PepTune (Tang et.al, 2024)](https://arxiv.org/abs/2412.17780), [MDLM (Sahoo et.al, 2023)](https://github.com/kuleshov-group/mdlm), [Drakes (Wang et.al, 2024)](https://github.com/ChenyuWang-Monica/DRAKES), and [MDNS (Zhu et.al, 2025)](https://arxiv.org/abs/2508.10684).
 
 ## Environment Installation
 ```

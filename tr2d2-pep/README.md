@@ -2,7 +2,7 @@
 
 This part of the code is for finetuning a peptide MDM to optimize multiple therapeutic properties, including binding affinity to a protein target, solubility, non-hemolysis, non-fouling, and cell membrane permeability, with TR2-D2. 
 
-The codebase is built upon [PepTune (Tang et.al, 2024)](https://arxiv.org/abs/2412.17780), [MDLM (Sahoo et.al, 2023)](https://github.com/kuleshov-group/mdlm), [SEPO (Zekri et.al, 2025)](https://github.com/ozekri/SEPO/tree/main), and [MDNS (Zhu et.al, 2025)](https://arxiv.org/abs/2508.10684).
+The codebase is partially built upon [PepTune (Tang et.al, 2024)](https://arxiv.org/abs/2412.17780), [MDLM (Sahoo et.al, 2023)](https://github.com/kuleshov-group/mdlm), and [MDNS (Zhu et.al, 2025)](https://arxiv.org/abs/2508.10684).
 
 ## Environment Installation
 ```
