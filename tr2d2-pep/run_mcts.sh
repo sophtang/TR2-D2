@@ -2,8 +2,8 @@
 
 HOME_LOC=/path/to/your/home
 ENV_PATH=/path/to/your/env
-SCRIPT_LOC=$HOME_LOC/tr2d2/peptides
-LOG_LOC=$HOME_LOC/tr2d2/peptides/logs
+SCRIPT_LOC=$HOME_LOC/TR2-D2/tr2d2-pep
+LOG_LOC=$HOME_LOC/TR2-D2/tr2d2-pep/logs
 DATE=$(date +%m_%d)
 SPECIAL_PREFIX='tfr-peptune-baseline'
 PYTHON_EXECUTABLE=$ENV_PATH/bin/python
